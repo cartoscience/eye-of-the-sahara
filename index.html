@@ -47,9 +47,9 @@
 	    
   d3.request("./eos_dem_4326.tiff").responseType('arraybuffer').get(
       function (error, tiffData) {
-      		let dem = L.ScalarField.fromGeoTIFF(tiffData.response, bandIndex = 0);
+      		let dem = L.ScalarField.fromGeoTIFF(tiffData.response);
 		let layerD = L.canvasLayer.scalarField(dem).addTo(map);
-	      	layerD.setColor(chroma.scale(['#fafa6e','#2A4858']).mode('lch').colors(6); 
+	      	layerD.setColor(chroma.scale(['#fafa6e','#2A4858']); 
 	        controlLayers.addOverlay(layerD, 'DEM');
                 layerD.on('click', function (e) {
                     if (e.value !== null) {
