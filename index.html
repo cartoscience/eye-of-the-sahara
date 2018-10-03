@@ -33,7 +33,7 @@
   <a class="github-fork-ribbon right-top" href="https://cartoscience.com" data-ribbon="cartoscience.com" title="cartoscience.com">cartoscience.com</a>
   <script>
 
-  var map = L.map('map', {scrollWheelZoom: true});
+  var map = L.map('map', {zoom: 11, scrollWheelZoom: true});
   var controlLayers = L.control.layers( null, null, {position: "topleft"}).addTo(map);
 	  
   var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -44,7 +44,7 @@
         function (error, tiffData) {
       		let dem = L.ScalarField.fromGeoTIFF(tiffData.response, bandIndex = 0);
 	    	let layerD = L.canvasLayer.scalarField(dem).addTo(map);
-	      	layerD.setColor(chroma.scale('RdPu').domain(dem.range)); 
+	      	layerD.setColor(chroma.scale(['#ff0000','#ff9237','#fdff4b','#54ff4f','#4fbaff','#c34bff','#431e63']).domain(dem.range)); 
 	        controlLayers.addOverlay(layerD, 'DEM');
 		map.fitBounds(layerD.getBounds());
 		layerD.on('click', function (e) {
