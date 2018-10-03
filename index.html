@@ -18,8 +18,9 @@
   <!-- Position the map with Cascading Style Sheet (.css) -->
   <style>
   body { margin:0; padding:0; }
-  #map-title { position: fixed; width: 100%; margin-top: 2%; text-align: center; font-family: Helvetica; font-weight: bold; color: white; font-size: 24px; z-index: 800; }
-  #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+  #map { position: absolute; top:0; bottom:0; right:0; left:0; }  
+  .github-fork-ribbon.right-top:before { background-color: #454545; }
+  .github-fork-ribbon.right-top:after { color: #dbdbdb; border-width: 0; text-shadow: 0 -.00em rgba(0, 0, 0, 0.5); }
   </style>
 </head>
 <body>
@@ -32,20 +33,12 @@
   <script>
 
   /* Set up the map with initial center and zoom level */
-  var map = L.map('map', {
-    center: [40.712216, -74.22655], 
-    zoom: 5, 
-    scrollWheelZoom: true
-  });
+  var map = L.map('map', { scrollWheelZoom: true });
 
   /* ESRI world imagery basemap tiles */
   var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 	  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
   }).addTo(map); 
-	  
-  var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
-    imageBounds = [[40.712216, -74.22655], [40.773941, -74.12544]];
-  L.imageOverlay(imageUrl, imageBounds).addTo(map);
 	  
   </script>
 </body>
