@@ -44,7 +44,7 @@
 	maxZoom: 14
   }).addTo(map);
 	    
-  d3.request("/eos_dem_4326.tiff").responseType('arraybuffer').get(
+  d3.request("./eos_dem_4326.tiff").responseType('arraybuffer').get(
       function (error, tiffData) {
       		let dem = L.ScalarField.fromGeoTIFF(tiffData.response);
 		let layerD = L.canvasLayer.scalarField(dem).addTo(map);
