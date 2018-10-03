@@ -25,24 +25,14 @@
   #map { position: absolute; top:0; bottom:0; right:0; left:0; }
   .github-fork-ribbon.right-top:before { background-color: #454545; }
   .github-fork-ribbon.right-top:after { color: #dbdbdb; border-width: 0; text-shadow: 0 -.00em rgba(0, 0, 0, 0.5); }
-  #content {
-    position: relative;
-  }
-  #content img {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-  }
+  #legend { position: fixed; top: 0px; left: 0px; }
 	  
   </style>
 </head>
 <body>
 
   <div id="map"></div>
-   <div id="content">
-      <img src="./legend.png" class="ribbon"/>
-      <div></div>
-  </div>
+  <div id="legend"><img src="./legend.png"/></div>
 
   <a class="github-fork-ribbon right-top" href="https://cartoscience.com" data-ribbon="cartoscience.com" title="cartoscience.com">cartoscience.com</a>
   <script>
