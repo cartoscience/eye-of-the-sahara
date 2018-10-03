@@ -1,8 +1,19 @@
+
 <!DOCTYPE html>
 <html>
-
+  
+  <!-- Thanks to the following creators -->	
+  <!-- https://github.com/Leaflet/Leaflet -->
+  <!-- https://github.com/JackDougherty/leaflet-map-simple -->
+  <!-- https://github.com/simonwhitaker/github-fork-ribbon-css --> 
+  <!-- https://github.com/gka/chroma.js -->	
+  <!-- https://github.com/d3/d3 -->	
+  <!-- https://github.com/geotiffjs/geotiff.js -->
+  <!-- https://github.com/IHCantabria/Leaflet.CanvasLayer.Field -->
+  <!-- https://github.com/leaflet-extras/leaflet-providers --> 
+	
 <head>
-  <title>eye-of-the-sahara</title>
+  <title>geovis-maup</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
 	
@@ -24,46 +35,115 @@
   body { margin:0; padding:0; }
   #map { position: absolute; top:0; bottom:0; right:0; left:0; }  
   .github-fork-ribbon.right-top:before { background-color: #454545; }
-  .github-fork-ribbon.right-top:after { color: #dbdbdb; border-width: 0; text-shadow: 0 -.00em rgba(0, 0, 0, 0.5); }  
+  .github-fork-ribbon.right-top:after { color: #dbdbdb; border-width: 0; text-shadow: 0 -.00em rgba(0, 0, 0, 0.5); }
+  .info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; }
+  .legend { text-align: left; line-height: 18px; color: #555; } 
+  .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.8; }	  
   </style>
 	
 </head>
-
+	
 <body>
   <div id="map"></div>
   <a class="github-fork-ribbon right-top" href="https://cartoscience.com" data-ribbon="cartoscience.com" title="cartoscience.com">cartoscience.com</a>
   <script>
   
   var map = L.map('map', {scrollWheelZoom: true});
-  	  
-  var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-  }).addTo(map);
+  
+  var controlLayers = L.control.layers( null, null, {position: "topleft"}).addTo(map);
 	  
-/*	  
-  d3.request("./eos_dem_4326.tiff").responseType('arraybuffer').get(
-      function (error, tiffData) {
-      		let dem = L.ScalarField.fromGeoTIFF(tiffData.response);
-		let layerD = L.canvasLayer.scalarField(dem).addTo(map);
-	      	layerD.setColor(chroma.scale(['#fafa6e','#2A4858'])); 
-	        controlLayers.addOverlay(layerD, 'DEM');
-                layerD.on('click', function (e) {
-                    if (e.value !== null) {
-                        let v = e.value;
-                        let html = (`<span class="popupText">Elevation: ${v} m</span>`);
-                        let popup = L.popup()
-                            .setLatLng(e.latlng)
-                            .setContent(html)
-                            .openOn(map);
-                    }
-		});
-      });
+  var esri = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Imagery tiles: &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+  	minZoom: 2,
+	maxZoom: 14
+  }).addTo(map);
+  /*	   
+  var colors = ['#f1c468', '#e2783e', '#8ccbce', '#296597', '#a1c453', '#4e8f42'];
+	  
+  d3.text('./images/mwd_ea_pt_4326.asc', function (asc) {
+  	var sd = L.ScalarField.fromASCIIGrid(asc);
+    	var layerd = L.canvasLayer.scalarField(sd).addTo(map);
+	layerd.setColor(chroma.scale(colors).classes([1,2,3,4,5,6,7]));  
+	controlLayers.addBaseLayer(layerd, 'District level'); //addOverlay
+    		  
+    	layerd.on('click', function (ed) {
+	    if (ed.value !== null) {
+		    var vd = ed.value; //.toFixed(1);
+		    var htmld = `<span class="popupText">Category: ${vd} </span>`;
+		    var popupd = L.popup().setLatLng(ed.latlng).setContent(htmld).openOn(map);
+	    }
+    	});	  
+  });
+	  
+  d3.text('./images/mwc_ea_pt_4326.asc', function (asc) {
+  	var sc = L.ScalarField.fromASCIIGrid(asc);
+    	var layerc = L.canvasLayer.scalarField(sc).addTo(map);
+	layerc.setColor(chroma.scale(colors).classes([1,2,3,4,5,6,7]));  
+	controlLayers.addBaseLayer(layerc, 'Country level'); 
+	map.fitBounds(layerc.getBounds());
+	  
+    	layerc.on('click', function (ec) {
+	    if (ec.value !== null) {
+		    var vc = ec.value; //.toFixed(1);
+		    var htmlc = `<span class="popupText">Category: ${vc} </span>`;
+		    var popupc = L.popup().setLatLng(ec.latlng).setContent(htmlc).openOn(map);
+	    }
+    	});	  
+  });
+	    
+  map.createPane('labels');
+  map.getPane('labels').style.zIndex = 650;
+  map.getPane('labels').style.pointerEvents = 'none';
+  var Stamen_TonerHybrid = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Boundary tiles: <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>.',
+	subdomains: 'abcd',
+	minZoom: 2,
+	maxZoom: 14,
+	ext: 'png',
+	pane: 'labels'
+  }).addTo(map);
+  	  
+  function getColor(d) {
+        return d === '1. Low stable'      ? "#f1c468" :
+               d === '2. Low variable'    ? "#e2783e" :
+               d === '3. Medium stable'   ? "#8ccbce" :
+               d === '4. Medium variable' ? "#296597" :
+	       d === '5. High stable'     ? "#a1c453" :
+                                         "#4e8f42" ;
+  }
+
+  function style(feature) {
+  	return {weight: 2, opacity: 1, color: 'white', fillColor: 'white'};
+  }
+	  
+  var legend = L.control({position: 'bottomright'});
+  legend.onAdd = function (map) {
+
+  	var div = L.DomUtil.create('div', 'info legend'),
+    	    labels = ['<strong>Productivity trend</strong>'],
+    	    categories = ['1. Low stable','2. Low variable','3. Medium stable','4. Medium variable','5. High stable','6. High variable'];
+
+    	for (var i = 0; i < categories.length; i++) {
+
+            div.innerHTML += 
+            labels.push(
+                '<i style="background:' + getColor(categories[i]) + '"></i> ' +
+            (categories[i] ? categories[i] : '+'));
+
+        }
+        div.innerHTML = labels.join('<br>');
+    	return div;
+  };
+	  
+  legend.addTo(map);	  
   */
-  map.attributionControl.addAttribution('Elevation: NASA JPL <a href="https://www2.jpl.nasa.gov/srtm/">SRTM</a>');  
-  map.attributionControl.addAttribution('Map design by Brad G. Peter, &copy <a href="https://cartoscience.com/multiscalar-decision-support">CartoScience</a>, <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>');
+  map.attributionControl.addAttribution('Map design by Brad G. Peter, &copy <a href="https://cartoscience.com/multiscalar-decision-support">CartoScience</a>, <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> &mdash; Map and manuscript (Peter et al. 2018) published by &copy <a href="https://www.tandfonline.com/doi/abs/10.1080/24694452.2017.1403877">AAG</a>');
 	  
   </script>
 	
 </body>
 	
 </html>
+
+
+
