@@ -1,6 +1,6 @@
 # Eye of the Sahara
 <br>
-<a href = "https://cartoscience.github.io/productivity-trends/">Link to map</a>
+<a href = "https://cartoscience.github.io/eye-of-the-sahara/">Link to map</a>
 <br>
 <br>
 NASA JPL <a href = "https://www2.jpl.nasa.gov/srtm/">SRTM</a> Digital Elevation Model
