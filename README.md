@@ -1,6 +1,8 @@
 # Eye of the Sahara
 <br>
 <br>
+NASA JPL <a href = "https://www2.jpl.nasa.gov/srtm/">SRTM</a> Digital Elevation Model
+<br>
 <b>Plugins and dependencies thanks to the following creators:</b>	
 <br>
 https://github.com/Leaflet/Leaflet 
