@@ -45,13 +45,13 @@
 	maxZoom: 14
   }).addTo(map);
 	    
-  d3.request("/eos_dem_4326.tif").responseType('arraybuffer').get(
+  d3.request("./eos_dem_4326.tiff").responseType('arraybuffer').get(
       function (error, tiffData) {
       		var dem = L.ScalarField.fromGeoTIFF(tiffData.response);
 		var layerD = L.canvasLayer.scalarField(dem, {
                     color: chroma.scale(['#fafa6e','#2A4858']).mode('lch').colors(6).domain(dem.range),
                     opacity: 0.65
-      }).addTo(map);
+      		}).addTo(map);
                 layerD.on('click', function (e) {
                     if (e.value !== null) {
                         var v = e.value.toFixed(0);
@@ -61,7 +61,7 @@
                             .setContent(html)
                             .openOn(map);
                     }
-  });
+      });
   
   map.attributionControl.addAttribution('Elevation: NASA JPL <a href="https://www2.jpl.nasa.gov/srtm/">SRTM</a>');  
   map.attributionControl.addAttribution('Map design by Brad G. Peter, &copy <a href="https://cartoscience.com/multiscalar-decision-support">CartoScience</a>, <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> &mdash; Map and manuscript (Peter et al. 2018) published by &copy <a href="https://www.tandfonline.com/doi/abs/10.1080/24694452.2017.1403877">AAG</a>');
