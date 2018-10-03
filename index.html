@@ -45,18 +45,18 @@
 	maxZoom: 14
   }).addTo(map);
 	    
-  d3.request("./eos_dem_4326.tiff").responseType('arraybuffer').get(
+  d3.request("/eos_dem_4326.tiff").responseType('arraybuffer').get(
       function (error, tiffData) {
-      		var dem = L.ScalarField.fromGeoTIFF(tiffData.response);
-		var layerD = L.canvasLayer.scalarField(dem, {
+      		let dem = L.ScalarField.fromGeoTIFF(tiffData.response);
+		let layerD = L.canvasLayer.scalarField(dem, {
                     color: chroma.scale(['#fafa6e','#2A4858']).mode('lch').colors(6).domain(dem.range),
                     opacity: 0.65
       		}).addTo(map);
                 layerD.on('click', function (e) {
                     if (e.value !== null) {
-                        var v = e.value.toFixed(0);
-                        var html = (`<span class="popupText">Geopotential height ${v} m</span>`);
-                        var popup = L.popup()
+                        let v = e.value.toFixed(0);
+                        let html = (`<span class="popupText">Geopotential height ${v} m</span>`);
+                        let popup = L.popup()
                             .setLatLng(e.latlng)
                             .setContent(html)
                             .openOn(map);
