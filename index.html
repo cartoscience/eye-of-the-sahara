@@ -34,7 +34,7 @@
   <a class="github-fork-ribbon right-top" href="https://cartoscience.com" data-ribbon="cartoscience.com" title="cartoscience.com">cartoscience.com</a>
   <script>
 
-  var map = L.map('map', {zoomControl: false; scrollWheelZoom: true});
+  var map = L.map('map', {scrollWheelZoom: true});
   var controlLayers = L.control.layers( null, null, {position: "bottomright"}).addTo(map);
 	  
   var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
