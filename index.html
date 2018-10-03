@@ -5,17 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
 
-  <!-- Load Leaflet: instructions at http://leafletjs.com/download.html -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
   integrity="sha384-Zh+y1U8o6/7ni8Mp8szvUfZjGeKKS10CGH3IlD6L1X+XwzYgQ1llOjw/Wslc0cma"
   crossorigin="anonymous">
   <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"
   integrity="sha384-6rCYjRgWDEI2RlZxiVihj1WIZB/uvFiRCGpavTVgFrSPDL0Bk1AiqCW+mmv5h0LP"
   crossorigin="anonymous"></script>
-  <!-- Load Omnivore plugin to convert CSV to GeoJSON format -->
-  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
 
-  <!-- Position the map with Cascading Style Sheet (.css) -->
+  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css" />
+
   <style>
   body { margin:0; padding:0; }
   #map { position: absolute; top:0; bottom:0; right:0; left:0; }  
@@ -25,17 +24,13 @@
 </head>
 <body>
 
-  <!-- Display the map with HTML division tags  -->
-  <div id="map-title">map title test 5</div>
+  <a class="github-fork-ribbon right-top" href="https://cartoscience.com" data-ribbon="cartoscience.com" title="cartoscience.com">cartoscience.com</a>
   <div id="map"></div>
 
-  <!-- Create the map content with JavaScript (.js) -->
   <script>
 
-  /* Set up the map with initial center and zoom level */
   var map = L.map('map', { scrollWheelZoom: true });
 
-  /* ESRI world imagery basemap tiles */
   var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 	  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
   }).addTo(map); 
