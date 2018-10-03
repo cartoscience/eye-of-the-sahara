@@ -45,13 +45,12 @@
 	maxZoom: 14
   }).addTo(map);
 	    
-  d3.request("/eos_dem_4326.tiff").responseType('arraybuffer').get(
+  d3.request("./eos_dem_4326.tiff").responseType('arraybuffer').get(
       function (error, tiffData) {
       		let dem = L.ScalarField.fromGeoTIFF(tiffData.response);
-		let layerD = L.canvasLayer.scalarField(dem, {
-                    color: chroma.scale(['#fafa6e','#2A4858']).mode('lch').colors(6).domain(dem.range),
-                    opacity: 0.65
-      		}).addTo(map);
+		let layerD = L.canvasLayer.scalarField(dem).addTo(map);
+	      	layerd.setColor(chroma.scale(['#fafa6e','#2A4858']).mode('lch').colors(6); 
+	        controlLayers.addOverlay(layerd, 'District level');
                 layerD.on('click', function (e) {
                     if (e.value !== null) {
                         let v = e.value.toFixed(0);
