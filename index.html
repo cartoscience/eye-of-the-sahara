@@ -44,7 +44,7 @@
         function (error, tiffData) {
       		let dem = L.ScalarField.fromGeoTIFF(tiffData.response, bandIndex = 0);
 	    	let layerD = L.canvasLayer.scalarField(dem).addTo(map);
-	      	layerD.setColor(chroma.scale(['#0d191b','#73d8ff','#bd75ff','#9534ff','#000000','#f5f1ff']).domain(dem.range)); 
+	      	layerD.setColor(chroma.scale(['#060c0e','#73d8ff','#9058ff','#ff4811','#ffa050','#e7ff25']).domain(dem.range)); 
 	        controlLayers.addOverlay(layerD, 'DEM');
 		map.fitBounds(layerD.getBounds());
 		layerD.on('click', function (e) {
