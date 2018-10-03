@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>test</title>
+  <title>eye-of-the-sahara</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
 	
@@ -44,7 +44,7 @@
         function (error, tiffData) {
       		let dem = L.ScalarField.fromGeoTIFF(tiffData.response, bandIndex = 0);
 	    	let layerD = L.canvasLayer.scalarField(dem).addTo(map);
-	      	layerD.setColor(chroma.scale(['#ff0000','#ff9237','#fdff4b','#54ff4f','#4fbaff','#c34bff','#431e63']).domain(dem.range)); 
+	      	layerD.setColor(chroma.scale(['#0d191b','#73d8ff','#bd75ff','#9534ff','#f5f1ff']).domain(dem.range)); 
 	        controlLayers.addOverlay(layerD, 'DEM');
 		map.fitBounds(layerD.getBounds());
 		layerD.on('click', function (e) {
