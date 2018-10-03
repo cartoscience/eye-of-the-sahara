@@ -49,12 +49,12 @@
       function (error, tiffData) {
       		let dem = L.ScalarField.fromGeoTIFF(tiffData.response);
 		let layerD = L.canvasLayer.scalarField(dem).addTo(map);
-	      	layerd.setColor(chroma.scale(['#fafa6e','#2A4858']).mode('lch').colors(6); 
-	        controlLayers.addOverlay(layerd, 'District level');
+	      	layerD.setColor(chroma.scale(['#fafa6e','#2A4858']).mode('lch').colors(6); 
+	        controlLayers.addOverlay(layerD, 'DEM');
                 layerD.on('click', function (e) {
                     if (e.value !== null) {
-                        let v = e.value.toFixed(0);
-                        let html = (`<span class="popupText">Geopotential height ${v} m</span>`);
+                        let v = e.value;
+                        let html = (`<span class="popupText">Elevation: ${v} m</span>`);
                         let popup = L.popup()
                             .setLatLng(e.latlng)
                             .setContent(html)
