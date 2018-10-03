@@ -49,8 +49,7 @@
 	    	let layerD = L.canvasLayer.scalarField(dem).addTo(map);
 	      	layerD.setColor(chroma.scale('RdPu').domain(dem.range)); 
 	        controlLayers.addOverlay(layerD, 'DEM');
-		map.fitBounds(layerc.getBounds());
-                layerD.on('click', function (e) {
+		layerD.on('click', function (e) {
                     if (e.value !== null) {
                         let v = e.value;
                         let html = (`<span class="popupText">Elevation: ${v} m</span>`);
@@ -60,6 +59,7 @@
                             .openOn(map);
                     }
 	    });
+	    map.fitBounds(layerD.getBounds());
   });
 	  
   </script>
