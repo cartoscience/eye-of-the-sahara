@@ -49,6 +49,7 @@
 	    	let layerD = L.canvasLayer.scalarField(dem).addTo(map);
 	      	layerD.setColor(chroma.scale('RdPu').domain(dem.range)); 
 	        controlLayers.addOverlay(layerD, 'DEM');
+		map.fitBounds(layerD.getBounds());
 		layerD.on('click', function (e) {
                     if (e.value !== null) {
                         let v = e.value;
@@ -59,7 +60,6 @@
                             .openOn(map);
                     }
 	    });
-	    map.fitBounds(layerD.getBounds());
   });
 	  
   </script>
