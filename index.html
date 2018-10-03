@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>eye-of-the-sahara</title>
+  <title>eye-of-the-sahara</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
 	
@@ -35,14 +35,11 @@
   <script>
   
   var map = L.map('map', {scrollWheelZoom: true});
-  
-  var controlLayers = L.control.layers( null, null, {position: "topleft"}).addTo(map);
-	  
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Imagery tiles: &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-  	minZoom: 2,
-	maxZoom: 14
+  	  
+  var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
   }).addTo(map);
+	  
 /*	  
   d3.request("./eos_dem_4326.tiff").responseType('arraybuffer').get(
       function (error, tiffData) {
