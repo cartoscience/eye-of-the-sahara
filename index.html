@@ -46,7 +46,6 @@
 	    	let layerD = L.canvasLayer.scalarField(dem).addTo(map);
 	      	layerD.setColor(chroma.scale(['#060c0e','#73d8ff','#9058ff','#ff4811','#ffa050','#e7ff25']).domain([260,620])); 
 	        controlLayers.addOverlay(layerD, 'DEM');
-		map.fitBounds(layerD.getBounds());
 		layerD.on('click', function (e) {
                     if (e.value !== null) {
                         let v = e.value;
@@ -58,6 +57,7 @@
                     }
 	    });
   });
+  map.fitBounds([[-12.399000257431567,20.457951120898453],[-10.465406507431569,20.457951120898453],[-10.465406507431569,21.82076231650476],[-12.399000257431567,21.82076231650476],[-12.399000257431567,20.457951120898453]]);
 	  
   </script>
 </body>
