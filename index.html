@@ -43,12 +43,13 @@
 	  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
   }).addTo(map); 
 	  
-  d3.request("./eos_dem_4326.tiff").responseType('arraybuffer').get(
+  d3.request("./eos_dem_fib_4326.tiff").responseType('arraybuffer').get(
         function (error, tiffData) {
       		let dem = L.ScalarField.fromGeoTIFF(tiffData.response, bandIndex = 0);
 	    	let layerD = L.canvasLayer.scalarField(dem).addTo(map);
 	      	layerD.setColor(chroma.scale(['#060c0e','#73d8ff','#9058ff','#ff4811','#ffa050','#e7ff25']).domain([260,620])); 
 	        controlLayers.addOverlay(layerD, 'DEM');
+		map.fitBounds(layerD.getBounds());
 		layerD.on('click', function (e) {
                     if (e.value !== null) {
                         let v = e.value;
@@ -61,7 +62,6 @@
 	    });
   });
 
-  map.fitBounds([[21.574463,-12.283337],[20.725894,-10.882853]]);
   map.attributionControl.addAttribution('Map design by Brad G. Peter, &copy <a href="https://cartoscience.com/multiscalar-decision-support">CartoScience</a>, <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>');
   map.attributionControl.addAttribution('Elevation: NASA JPL <a href="https://www2.jpl.nasa.gov/srtm/">SRTM<a/>.');  
 
