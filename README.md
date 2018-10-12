@@ -1,5 +1,4 @@
 # Eye of the Sahara
-<br>
 <a href = "https://cartoscience.github.io/eye-of-the-sahara/">Link to map</a>
 <br>
 <br>
