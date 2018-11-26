@@ -24,3 +24,6 @@ https://github.com/IHCantabria/Leaflet.CanvasLayer.Field
 https://github.com/Sumbera/gLayers.Leaflet
 <br>
 https://github.com/leaflet-extras/leaflet-providers 
+
+<br><br>
+	<p class="footer">&copy; 2018 <a target="_blank" rel="noopener noreferrer" href="https://cartoscience.com">Cartoscience</a></p>
